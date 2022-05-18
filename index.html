@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>homework13</title>
+</head>
+
+<body>
+    <script>
+        const lookForPalindrome = function (num) {
+            let steps = 0;
+
+            function checkPalindrome(num) {
+                try {
+                    if (num < 0) return false;
+
+                    if (isPalindrome(num)) {
+                        return {
+                            result: num,
+                            steps
+                        };
+                    }
+
+                    function isPalindrome(num) {
+                        let numberToCheck = num.toString();
+                        let arrCheck = Array.from(numberToCheck);
+                        const half = arrCheck.length / 2;    
+                        const firstHalf = arrCheck.splice(0, half).join('');
+                        const secondHalf = arrCheck.splice(-half).reverse().join('');
+
+                        if (numberToCheck.length === 1) return true;
+                        if (firstHalf === secondHalf) return true;
+                        return false;
+                    }
+
+                    ++steps;
+                    const reverseNum = Number(num.toString().split('').reverse().join(''));
+                    const newNum = num + reverseNum;
+                    
+                    return checkPalindrome(newNum);
+
+                } catch (error) {
+                    return 'undefined';
+                }
+            }
+
+            return checkPalindrome(num);
+        }
+    </script>
+</body>
+</html>
